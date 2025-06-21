@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import ResumeBuilder from './components/Resume'
 import axios from 'axios'
 
 function App() {
-  const [pr, setpr] = useState("")
+  const [pr, setpr] = useState("create a resume for web developer profile")
   const [isRunning,setRunning] = useState(false);
   
   const resumeData = `
@@ -97,19 +96,20 @@ function App() {
   const [data,setData ] = useState(null);
   const handleSubmit = async(e)=>{
     e.preventDefault();
+    console.log('sent');
     const response = await axios.post("http://localhost:4000/api/v1/build-resumse",{prompt:resumeData})
     const res = response.data
-    console.log(res);
+    setData(res)
   }
   return (
     <>
     <div className=''>
-      <div>
-        <label htmlFor="">Enter Prompt</label>
-        <input type="text" value={pr} onChange={(e)=>setpr(e.target.value)}/>
-        <button onClick={(e)=>handleSubmit(e)}>Submit</button>
+      <div className='flex flex-col w-[40vw] justify-center items-center m-auto'>
+        <label htmlFor="" className=''>Enter Prompt</label>
+        <textarea type="text" className='border border-red-500' rows={10} cols={50} value={pr} onChange={(e)=>setpr(e.target.value)}/>
+        <button onClick={(e)=>handleSubmit(e)} className='w-fit bg-amber-400 p-4 rounded-4xl'>Submit</button>
       </div>
-      <ResumeBuilder resumeData={resumeData} />
+    {data &&  <ResumeBuilder resumeData={data} />}
       
     </div>
     </>

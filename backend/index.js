@@ -87,7 +87,7 @@ app.get('/',(req,res)=>{
     console.log('hitted')
     return res.json({message:"Hello"});
 })
-app.get('/api/v1/build-resumse',generateResume)
+app.post('/api/v1/build-resumse',generateResume)
 
 app.listen(4000,()=>{
     console.log("Chala");

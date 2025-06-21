@@ -8,15 +8,7 @@ const model = genAi.getGenerativeModel({
 });
 async function generateResume(req, res) {
   try {
-    const prompt = `
-Generate a structured professional resume for a software engineer named John Doe with the following details:
-- 5+ years of experience
-- Works at TechCorp Inc. and CodeWorks LLC
-- Skilled in JavaScript, Python, Java, React, Node.js, Docker, AWS, Jenkins
-- Certified AWS Solutions Architect
-- Speaks English and Spanish
-- Graduated from UC Berkeley in Computer Science
-`;
+    const {prompt} = req.body
 
 console.log('prompt given :',prompt)
     const response = await model.generateContent({
